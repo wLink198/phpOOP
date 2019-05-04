@@ -2,6 +2,7 @@
 namespace MVC\Controllers;
 
 use MVC\Models\TaskRepository;
+use MVC\Models\Task;
 use MVC\Core\Controller;
 
 class tasksController extends Controller
@@ -24,7 +25,10 @@ class tasksController extends Controller
     {
         if (isset($_POST["title"]))
         {
-            if ($this->taskRepository->create($_POST["title"], $_POST["description"]))
+            $task = new Task();
+            $task->setTitle($_POST["title"]);
+            $task->setDescription($_POST["description"]);
+            if ($this->taskRepository->create($task))
             {
                 header("Location: " . WEBROOT . "tasks/index");
             }
@@ -39,7 +43,10 @@ class tasksController extends Controller
 
         if (isset($_POST["title"]))
         {
-            if ($this->taskRepository->edit($id, $_POST["title"], $_POST["description"]))
+            $task = new Task();
+            $task->setTitle($_POST["title"]);
+            $task->setDescription($_POST["description"]);
+            if ($this->taskRepository->edit($id, $task))
             {
                 header("Location: " . WEBROOT . "tasks/index");
             }

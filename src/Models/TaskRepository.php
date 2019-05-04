@@ -2,7 +2,6 @@
 namespace MVC\Models;
 
 use MVC\Models\TaskResourceModel;
-use MVC\Models\Task;
 
 class TaskRepository
 {
@@ -18,12 +17,8 @@ class TaskRepository
         return $this->trm->all();
     }
 
-    public function create($title, $des) {
-        $task = new Task();
-        $task->setTitle($title);
-        $task->setDescription($des);
-
-        return $this->trm->save($task);
+    public function create($model) {
+        return $this->trm->save($model);
     }
 
     public function showTask($id)
@@ -31,12 +26,9 @@ class TaskRepository
         return $this->trm->find($id);
     }
 
-    public function edit($id, $title, $des)
+    public function edit($id, $model)
     {
-        $task = new Task();
-        $task->setTitle($title);
-        $task->setDescription($des);
-        return $this->trm->update($id, $task);
+        return $this->trm->update($id, $model);
     }
 
     public function delete($id)
