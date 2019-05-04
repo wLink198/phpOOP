@@ -1,8 +1,11 @@
 <?php
+namespace MVC;
+
+use MVC\Router;
+use MVC\Request;
 
 class Dispatcher
 {
-
     private $request;
 
     public function dispatch()
@@ -21,9 +24,11 @@ class Dispatcher
         $name = 'MVC\Controllers\\' . $this->request->controller . "Controller";
         $file = str_replace("MVC\Controllers\\", "", ROOT . 'Controllers/' . $name . '.php');
         require($file);
-        $controller = new $name();
+        $repo = "MVC\Models\\".ucfirst(substr($this->request->controller, 0, -1)) . "Repository";
+
+        $repository = new $repo();
+        $controller = new $name($repository);
         return $controller;
     }
-
 }
 ?>

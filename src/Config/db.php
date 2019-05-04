@@ -1,5 +1,5 @@
 <?php
-namespace MVC\Congfig;
+namespace MVC\Config;
 
 use PDO;
 

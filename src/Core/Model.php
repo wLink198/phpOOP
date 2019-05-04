@@ -3,6 +3,6 @@ namespace MVC\Core;
 
 class Model
 {
-
+    
 }
 ?>
